@@ -92,8 +92,6 @@ public class ExcelReadFactory {
                     sheetIndex++;
 
                 } finally {
-                    System.out.println("end while");
-
                     if (inputStream != null) {
                         inputStream.close();
                     }
