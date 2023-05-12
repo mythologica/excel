@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MailMargeConfig {
-    private List<String> findKeys = new ArrayList<>();
+    private List<String> parseKeys = new ArrayList<>();
     private String html = "";
 
-    public List<String> getFindKeys() {
-        return findKeys;
+    public List<String> getParseKeys() {
+        return parseKeys;
     }
 
-    public void setFindKeys(List<String> findKeys) {
-        this.findKeys = findKeys;
+    public void setParseKeys(List<String> parseKeys) {
+        this.parseKeys = parseKeys;
     }
 
     public String getHtml() {

@@ -1,6 +1,5 @@
 package org.example;
 
-import org.apache.commons.lang3.StringUtils;
 import org.example.common.mailreqex.MailDataMatcher;
 import org.example.common.mailreqex.MailReqEx;
 import org.example.common.mailreqex.vo.MailMargeConfig;
@@ -18,27 +17,27 @@ public class MailDataMatcherFactory {
     public static String QRCODE = "qrcode";
     public static String MARKING_OPT_OUT = "markingOptOut";
 
-    private static MailMargeConfig getFindKeys(String src) {
+    private static MailMargeConfig getParseKeys(String src) {
         MailMargeConfig config = new MailMargeConfig();
         Pattern pattern = Pattern.compile("(\\<!--\\@mailparser-config\\{[0-9a-zA-Z,\\s]*}@-->)");
         Matcher matcher = pattern.matcher(src);
-        List<String> findKeys = new ArrayList<>();
+        List<String> parseKeys = new ArrayList<>();
         String configStr = "";
         if( matcher.find() ) {
             configStr = ""+matcher.group();
             String[] tempStr = matcher.group().replaceAll("\\<!-\\-@mailparser-config\\{" ,"").replaceAll("\\}@-->","").split("[,]");
             for(String key:tempStr) {
-                findKeys.add(key.trim());
+                parseKeys.add(key.trim());
             }
         }
         config.setHtml(src.substring(configStr.length()));
-        config.setFindKeys(findKeys);
+        config.setParseKeys(parseKeys); //
         return config;
     }
 
     public static String parse(String src) throws Exception {
-        MailMargeConfig config = getFindKeys(src);
-        List<String> parseKeys = config.getFindKeys();
+        MailMargeConfig config = getParseKeys(src);
+        List<String> parseKeys = config.getParseKeys();
         if( parseKeys.size() > 0 ) {
             return MailDataMatcherFactory.reqEx(parseKeys).parse(config.getHtml());
         } else {
@@ -47,7 +46,7 @@ public class MailDataMatcherFactory {
     }
 
     public static String parse(String src,List<String> parseKeys) throws Exception {
-        String html = getFindKeys(src).getHtml();
+        String html = getParseKeys(src).getHtml();
         return MailDataMatcherFactory.reqEx(parseKeys).parse(html);
     }
 
