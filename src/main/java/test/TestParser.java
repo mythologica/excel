@@ -24,7 +24,7 @@ public class TestParser {
     public void doCustomConfig() throws Exception {
         String src = read();
 
-        List<String> parseKeys = Arrays.asList(MailDataMatcherFactory.QRCODE, MailDataMatcherFactory.MARKING_OPT_OUT);
+        List<String> parseKeys = Arrays.asList(MailDataMatcherFactory.USER,MailDataMatcherFactory.QRCODE, MailDataMatcherFactory.MARKING_OPT_OUT);
         String result = MailDataMatcherFactory.parse(src,parseKeys);
         System.out.println("result:" + result);
     }
