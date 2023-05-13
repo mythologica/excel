@@ -1,4 +1,4 @@
-package test;
+package org.example;
 
 import org.example.TemplateMailMergeDataBuilder;
 import org.example.common.mailreqex.MailDataParser;
@@ -16,11 +16,13 @@ public class TestParser {
     public void doAutoConfig() throws Exception {
         String originalHtml = read();
 
-        Map<String,String> databaseKeys = new LinkedHashMap<>();
+        Map<String,String> defaultData = new LinkedHashMap<>();
 
-        databaseKeys.put("userId","dkdkdkdkdkd"); //조회할 userId
+        defaultData.put("userId","dkdkdkdkdkd"); //조회할 userId
+        defaultData.put("qrcode.fromDate", "2023-05-13");
+        defaultData.put("qrcode.toDate", "2023-05-20");
 
-        TemplateMailMergeDataBuilder dataBuilder = new TemplateMailMergeDataBuilder(databaseKeys);
+        TemplateMailMergeDataBuilder dataBuilder = new TemplateMailMergeDataBuilder(defaultData);
 
         String result = new MailDataParser(originalHtml).parse(dataBuilder);
 

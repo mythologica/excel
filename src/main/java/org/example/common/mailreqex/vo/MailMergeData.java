@@ -1,12 +1,14 @@
 package org.example.common.mailreqex.vo;
 
+import lombok.ToString;
 import org.apache.commons.collections4.MapUtils;
 import org.example.common.mailreqex.MailMargeFunction;
 
 import java.math.BigDecimal;
 import java.util.*;
 
-public class MailGroupData {
+@ToString
+public class MailMergeData {
     private Map<String, Map<String,String>> dataMap = new LinkedHashMap<>();
 
     public void put(String groupId, String itemId, String value) {
@@ -82,13 +84,13 @@ public class MailGroupData {
         return defaultValue;
     }
 
-    public MailGroupData merge(MailMargeFunction mailMargeFunction) {
+    public MailMergeData merge(MailMargeFunction mailMargeFunction) {
         mailMargeFunction.init(this);
         return this;
     }
 
-    public MailGroupData clone() {
-        MailGroupData itemData = new MailGroupData();
+    public MailMergeData clone() {
+        MailMergeData itemData = new MailMergeData();
         for(String groupId:getGroupIds()) {
             Map<String,String> itemMap = dataMap.get(groupId);
             for(String itemId:getItemIds(groupId)) {

@@ -1,4 +1,4 @@
-package test;
+package org.example;
 
 import org.apache.commons.collections4.ListUtils;
 
