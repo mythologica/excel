@@ -1,31 +1,29 @@
 package test;
 
-import org.example.MailDataMatcherFactory;
-import org.example.common.mailreqex.MailReqEx;
+import org.example.TemplateMailMergeDataBuilder;
+import org.example.common.mailreqex.MailDataParser;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.Arrays;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class TestParser {
     public void doTest() throws Exception {
         doAutoConfig();
-        doCustomConfig();
     }
 
     public void doAutoConfig() throws Exception {
-        String src = read();
+        String originalHtml = read();
 
-        String result = MailDataMatcherFactory.parse(src);
-        System.out.println("result:" + result);
-    }
+        Map<String,String> databaseKeys = new LinkedHashMap<>();
 
-    public void doCustomConfig() throws Exception {
-        String src = read();
+        databaseKeys.put("userId","dkdkdkdkdkd"); //조회할 userId
 
-        List<String> parseKeys = Arrays.asList(MailDataMatcherFactory.USER,MailDataMatcherFactory.QRCODE, MailDataMatcherFactory.MARKING_OPT_OUT);
-        String result = MailDataMatcherFactory.parse(src,parseKeys);
+        TemplateMailMergeDataBuilder dataBuilder = new TemplateMailMergeDataBuilder(databaseKeys);
+
+        String result = new MailDataParser(originalHtml).parse(dataBuilder);
+
         System.out.println("result:" + result);
     }
 
@@ -49,6 +47,4 @@ public class TestParser {
 
         return sb.toString();
     }
-
-
 }
