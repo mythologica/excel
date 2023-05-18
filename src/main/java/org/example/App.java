@@ -16,7 +16,7 @@ public class App {
 
 //            new TestExcel().doTest();
 
-            new TestParser().doTest();
+            new TestExcelParser().doTest();
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -29,7 +29,7 @@ public class App {
 
 
     private void doTestParser() throws Exception {
-        new TestParser().doTest();
+        new TestExcelParser().doTest();
     }
 
 }

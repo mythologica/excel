@@ -1,6 +1,5 @@
 package org.example;
 
-import org.example.TemplateMailMergeDataBuilder;
 import org.example.common.mailreqex.MailDataParser;
 
 import java.io.BufferedReader;
@@ -8,7 +7,7 @@ import java.io.FileReader;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class TestParser {
+public class TestExcelParser {
     public void doTest() throws Exception {
         doAutoConfig();
     }
