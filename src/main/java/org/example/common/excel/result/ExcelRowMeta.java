@@ -10,14 +10,14 @@ import java.util.Map;
 
 @Getter
 public class ExcelRowMeta {
-    private Map<Integer,ExcelCellMeta> indexs = new HashMap<>();
-    private Map<String,ExcelCellMeta> ids = new HashMap<>();
-    private Map<String,ExcelCellMeta> names = new HashMap<>();
-    private List<ExcelCellMeta> cellMetas = new ArrayList<>();
+    private final Map<Integer,ExcelCellMeta> indexs = new HashMap<>();
+    private final Map<String,ExcelCellMeta> ids = new HashMap<>();
+    private final Map<String,ExcelCellMeta> names = new HashMap<>();
+    private final List<ExcelCellMeta> cellMetas = new ArrayList<>();
 
-    private List<Integer> columnIndexs = new ArrayList<>();
-    private List<String> columnIds = new ArrayList<>();
-    private List<String> columnNames = new ArrayList<>();
+    private final List<Integer> columnIndexs = new ArrayList<>();
+    private final List<String> columnIds = new ArrayList<>();
+    private final List<String> columnNames = new ArrayList<>();
 
     public ExcelRowMeta addCellMeta(int cellIndex , String id , String name) {
         ExcelCellMeta cellMeta = ExcelCellMeta.builder()

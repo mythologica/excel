@@ -18,7 +18,7 @@ public class SesJsonParser implements Serializable {
      * 이벤트 유형을 설명하는 문자열입니다. 가능한 값: Bounce, Complaint, Delivery, Send, Reject, Open, Click, Rendering Failure, DeliveryDelay 또는 Subscription
      * 이벤트 게시를 설정하지 않은 경우 이 필드의 이름은 notificationType입니다.
      */
-    public static enum SesStatus {
+    public enum SesStatus {
 
         BOUNCE("Bounce","bounce", true),//반송 관련 정보가 포함되어 있습니다.
         COMPLAINT("Complaint","complaint", true),//수신 거부 관련 정보가 포함되어 있습니다.

@@ -147,9 +147,7 @@ public class CommonUtils {
         List<String> list = new ArrayList<String>();
         if (array != null && array.length > 0) {
             int cnt = array.length;
-            for (int i = 0; i < cnt; i++) {
-                list.add(array[i]);
-            }
+            list.addAll(Arrays.asList(array).subList(0, cnt));
         }
         return list;
     }
@@ -162,7 +160,7 @@ public class CommonUtils {
      * @return
      */
     public static String zlpad(int number, int len) {
-        return zlpad("" + number, len);
+        return zlpad(String.valueOf(number), len);
     }
 
     /**
@@ -280,7 +278,7 @@ public class CommonUtils {
      * @return
      */
     public static long parseLong(String text) {
-        return parseLong(trim(text), 0l);
+        return parseLong(trim(text), 0L);
     }
 
     public static long parseLong(String text, long defaultValue) {

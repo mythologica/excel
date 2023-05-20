@@ -1,4 +1,4 @@
-package org.example;
+package test;
 
 import org.apache.commons.collections4.ListUtils;
 
@@ -59,7 +59,7 @@ public class TestJava {
         List<String> list = new ArrayList<String>(maxSize);
 
         for(int i=0;i<maxSize;i++) {
-            list.add(""+i);
+            list.add(String.valueOf(i));
         }
 
         List<List<String>> parts = ListUtils.partition(list,100);
@@ -83,9 +83,9 @@ public class TestJava {
         System.out.println(System.identityHashCode(a));
 
         List<String> list = new ArrayList<>();
-        list.add(String.valueOf(a));
+        list.add(a);
         System.out.println(System.identityHashCode(list.get(0)));
-        System.out.println(System.identityHashCode("" + a));
+        System.out.println(System.identityHashCode(a));
 
     }
 

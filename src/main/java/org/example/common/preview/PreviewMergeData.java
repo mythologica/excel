@@ -1,15 +1,15 @@
-package org.example.common.mailreqex.vo;
+package org.example.common.preview;
 
-import lombok.ToString;
 import org.apache.commons.collections4.MapUtils;
-import org.example.common.mailreqex.MailMargeFunction;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
-@ToString
-public class MailMergeData {
-    private Map<String, Map<String,String>> dataMap = new LinkedHashMap<>();
+public class PreviewMergeData {
+    private final Map<String, Map<String,String>> dataMap = new LinkedHashMap<>();
 
     public void put(String groupId, String itemId, String value) {
         Map<String,String> itemData = null;
@@ -84,19 +84,7 @@ public class MailMergeData {
         return defaultValue;
     }
 
-    public MailMergeData merge(MailMargeFunction mailMargeFunction) {
-        mailMargeFunction.init(this);
-        return this;
-    }
-
-    public MailMergeData clone() {
-        MailMergeData itemData = new MailMergeData();
-        for(String groupId:getGroupIds()) {
-            Map<String,String> itemMap = dataMap.get(groupId);
-            for(String itemId:getItemIds(groupId)) {
-                itemData.put(groupId,itemId,itemMap.get(itemId));
-            }
-        }
-        return itemData;
+    public PreviewMergeData merge(PreviewMergeFunction previewMergeFunction) {
+        return previewMergeFunction.init(this);
     }
 }
