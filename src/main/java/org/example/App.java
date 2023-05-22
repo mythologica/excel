@@ -1,6 +1,7 @@
 package org.example;
 
 import lombok.extern.log4j.Log4j2;
+import test.TestNetwork;
 import test.TestPreview;
 
 
@@ -15,7 +16,9 @@ public class App {
 //            new TestJava().doTest();
 //            new TestExcel().doTest();
 //            new TestExcelParser().doTest();
-            new TestPreview().doTest();
+//            new TestPreview().doTest();
+            new TestNetwork().doTest();
+
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
