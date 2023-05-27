@@ -6,17 +6,14 @@ import java.time.Instant;
 import java.time.Year;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class TestFTL {
 
     public void doTest() {
         try{
-            String path = "C:\\data\\dev\\workspace\\java\\excel\\src\\main\\resources\\templates";
-//            String path = "/resources/templates";
+//            String path = "C:\\data\\dev\\workspace\\java\\excel\\src\\main\\resources\\templates";
+            String path = "/templates";
             String templateName = "mail";
             String lang = "kr";
 
@@ -46,12 +43,11 @@ public class TestFTL {
                                         .atZone(ZoneId.of("Asia/Seoul"));
             Instant fromDate = zdtSeoul.toInstant();
 
-
-            params.put("fromDate", fromDate );
+            params.put("fromDate", Date.from(fromDate)  );
 
             ZonedDateTime zdtUs = fromDate.atZone(ZoneId.of("America/Vancouver"));
 
-            params.put("zdtUs", zdtUs );
+            params.put("zdtUs",  Date.from(zdtUs.toInstant())  );
 
             String result = new FTLParser(path).parse(templateName,lang,params);
 

@@ -2,35 +2,44 @@ package org.example.common.freemarker;
 
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.FileTemplateLoader;
-import freemarker.core.Environment;
+import freemarker.cache.MultiTemplateLoader;
+import freemarker.cache.TemplateLoader;
 import freemarker.template.Configuration;
+import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
-import lombok.Builder;
 
-import java.io.*;
+import java.io.File;
+import java.io.StringWriter;
+import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 public class FTLParser {
-	private Configuration cfg;
+	private static Configuration cfg;
+
+
 	private static final  String DEFAULT_ENCODING = "UTF-8";
 
-	public FTLParser(String path) throws IOException {
-		this.cfg = getConfig(path);
+	public FTLParser(String path) throws Exception {
+		initConfig(path);
 	}
 
+	private void initConfig(String path) throws Exception {
+		this.cfg = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
+		//this.cfg = new Configuration(Configuration.VERSION_2_3_32);
+		//this.cfg = new Configuration(Configuration.getVersion());
+		this.cfg.setEncoding(Locale.getDefault(),DEFAULT_ENCODING);
+//		this.cfg.setSQLDateAndTimeTimeZone(TimeZone.getDefault());
 
-	private Configuration getConfig(String path) throws IOException {
-		Configuration cfg = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
 		// 절대경로
-		FileTemplateLoader loader = new FileTemplateLoader(new File(path));
+		//this.cfg.setTemplateLoader(new FileTemplateLoader(new File(path)));
+
 		// 클래스 경로 이용
-		//ClassTemplateLoader loader = new ClassTemplateLoader(getClass(), "/resources/templates");
-		cfg.setDefaultEncoding(DEFAULT_ENCODING);
-		cfg.setTemplateLoader(loader);
-		return cfg;
+		this.cfg.setClassForTemplateLoading(FTLParser.class, "/templates/");
 	}
 
-	public String parse(String templateName, String lang, Map<String, Object> params) {
+	public String parse(String templateName, String lang, Map<String, Object> params) throws Exception {
+
 		/* ref: https://soft.plusblog.co.kr/99
 		 *  https://m.blog.naver.com/cana01/221460866010
 		 * */
@@ -38,7 +47,7 @@ public class FTLParser {
 		String result = "";
 		StringWriter w = new StringWriter();
 		try {
-			Template template = cfg.getTemplate(templateName + "_" + lang + ".ftl");
+			Template template = this.cfg.getTemplate(templateName+"_"+lang+".ftl");
 			// Map 객체를 이용해서 템플릿 처리
 			template.process(params, w);
 			result = w.getBuffer().toString();

@@ -7,8 +7,8 @@
 <body>
 <h1>${title?default("")}</h1>
 <h1>${test?default("test is empty")}</h1>
-<h1>${fromDate?default("")}</h1>
-<h1>${zdtUs?default("")}</h1>
+<h1>${fromDate?string("MM/dd/yyyy HH:mm:ss")}</h1>
+<h1>${zdtUs?string("MM/dd/yyyy HH:mm:ss")}</h1>
 
 <ol>
     <#if userNames?has_content>

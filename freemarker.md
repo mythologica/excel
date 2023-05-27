@@ -1,50 +1,4 @@
-# excel
-
-
-# mariadb (merge)
-
-```sql
-INSERT INTO table_name1
-(컬럼명1, 컬럼명2, 컬럼명3.. )
-SELECT 컬럼명1
-, 컬럼명2
-, 컬럼명3
-...
-FROM table_name2
-ON DUPLICATE KEY
-UPDATE 수정할 컬럼명1 = 수정될 새로운 값1
-, 수정할 컬럼명2 = 수정될 새로운 값2
-```
-
-# qrcode (base64)
-
-```
-data:image /bmp;base64, Qk32OAAAAAAAAD4AAAAoAAAA.....
-```
-
-# freemarker
-
-In simple cases you can build data-models using java.lang and java.util classes and custom JavaBeans:
-
-    Use java.lang.String for strings.
-
-    Use java.lang.Number subclasses for numbers.
-
-    Use java.lang.Boolean for boolean values.
-
-    Use java.util.Date and its subclasses for date/time values
-
-    Use java.util.List or Java arrays for sequences.
-
-    Use java.util.Map with String keys for hashes.
-
-
-
-# FreeMarker(프리마커) 문법 
-[링크1](https://zetcode.com/java/freemarker/)
-[링크2](https://m.blog.naver.com/cana01/221460866010)
-[링크3](https://www.baeldung.com/freemarker-operations)
-[링크4](https://soft.plusblog.co.kr/99)
+    FreeMarker(프리마커) 문법
 
 
 http://freemarker.org/docs/index.html
@@ -62,32 +16,26 @@ FTL tag
 
 
 반복문
-
-1. object 반복문
- ```
- <#list [Object code에서 key값 ]  as  [별칭할 값]>
- ```
+1.
+<#list [Object code에서 key값 ]  as  [별칭할 값]>
  
 2. for(int i=0;i<10;i++)
-```
 <#list  1..10  as i >
       ${i}
    <#assign i=i+1?int>
- ```
-1. 사이즈를 알고 싶을때.. Key 값이 list 인 경우
-``` 
+ 
+3. 사이즈를 알고 싶을때.. Key 값이 list 인 경우
+ 
 <#assign size=list?size>
-``` 
+ 
 4. 다른 변수로 정의하고 싶을때에는
-```
 <#setting [새로]=[기존]>
-```
+
  
 5. 변수선언
-```
 <#assign x=0>   <#--x에 0를 할당해 준것이다. -->
 x값을 출력하고자 할때 --> ${x}
-```
+
 
 6. <#macro green>
 “<@green>”이런식으로 쓴다.
