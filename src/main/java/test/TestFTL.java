@@ -1,21 +1,61 @@
 package test;
 
-import org.apache.velocity.VelocityContext;
 import org.example.common.freemarker.FTLParser;
 
-public class TestVM {
+import java.time.Instant;
+import java.time.Year;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class TestFTL {
 
     public void doTest() {
         try{
-            String path = "/resources/mail";
-            String fileName = "mail";
-//            VelocityContext context = new VelocityContext();
-//
-//            context.put("title","메일");
-//
-//            String str = new FTLParser("C:\\data\\dev\\workspace\\java\\excel\\src\\main\\resources\\mail\\mail_kr.vm", "kr" , context).parse();
-//
-//            System.out.println("mail:"+str);
+            String path = "C:\\data\\dev\\workspace\\java\\excel\\src\\main\\resources\\templates";
+//            String path = "/resources/templates";
+            String templateName = "mail";
+            String lang = "kr";
+
+            Map<String,Object> params = new HashMap<>();
+            params.put("title","메일");
+
+            List<Map<String,String>> rows = new ArrayList<>();
+
+            Map<String,String> row = new HashMap<>();
+            row.put("name","홍길동");
+            row.put("age","19");
+            rows.add(row);
+            Map<String,String> row2 = new HashMap<>();
+            row2.put("name","이순신");
+            row2.put("age","40");
+            rows.add(row2);
+            params.put("rows", rows );
+
+            List<String> userNames = new ArrayList<>();
+            userNames.add("정상국");
+            params.put("userNames",userNames);
+
+            ZonedDateTime zdtSeoul = Year.of(2023)
+                                        .atMonth(4)
+                                        .atDay(27)
+                                        .atTime(20,30)
+                                        .atZone(ZoneId.of("Asia/Seoul"));
+            Instant fromDate = zdtSeoul.toInstant();
+
+
+            params.put("fromDate", fromDate );
+
+            ZonedDateTime zdtUs = fromDate.atZone(ZoneId.of("America/Vancouver"));
+
+            params.put("zdtUs", zdtUs );
+
+            String result = new FTLParser(path).parse(templateName,lang,params);
+
+            System.out.println("mail:"+result);
 
         }catch(Exception e){
             e.printStackTrace();

@@ -6,7 +6,6 @@ import com.google.gson.JsonParser;
 import lombok.Getter;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -98,7 +97,7 @@ public class SesJsonParser implements Serializable {
         String message = this.jsonString;
 
         JsonObject messageObject = JsonParser.parseString(message).getAsJsonObject();
-        JsonObject mailObject = messageObject.get("mail").getAsJsonObject();
+        JsonObject mailObject = messageObject.get("templates").getAsJsonObject();
 
         this.messageId = getString(mailObject,"messageId");
         this.eventType = getString(messageObject, "eventType");
@@ -177,11 +176,11 @@ public class SesJsonParser implements Serializable {
         this.timestamp = formatter.format(Instant.parse(getString(eventObject,"timestamp")));
     }
     private void parseSend(JsonObject messageObject) {
-        JsonObject eventObject = messageObject.get("mail").getAsJsonObject();
+        JsonObject eventObject = messageObject.get("templates").getAsJsonObject();
         this.timestamp = formatter.format(Instant.parse(getString(eventObject,"timestamp")));
     }
     private void parseReject(JsonObject messageObject) {
-        JsonObject eventObject = messageObject.get("mail").getAsJsonObject();
+        JsonObject eventObject = messageObject.get("templates").getAsJsonObject();
         this.timestamp = formatter.format(Instant.parse(getString(eventObject,"timestamp")));
     }
     private void parseOpen(JsonObject messageObject) {
@@ -194,7 +193,7 @@ public class SesJsonParser implements Serializable {
         this.timestamp = formatter.format(Instant.parse(getString(eventObject,"timestamp")));
     }
     private void parseRenderingFailure(JsonObject messageObject) {
-        JsonObject eventObject = messageObject.get("mail").getAsJsonObject();
+        JsonObject eventObject = messageObject.get("templates").getAsJsonObject();
         this.timestamp = formatter.format(Instant.parse(getString(eventObject,"timestamp")));
     }
     private void parseDeliveryDelay(JsonObject messageObject) {
